@@ -1,277 +1,145 @@
-/* TwitterConnect.module.css */
-.container {
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  background: url("/image/bg.png") no-repeat center center;
-  background-size: cover;
-  overflow: hidden;
+.customContinueButton:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+}
+
+.customContinueButton:active {
+  transform: translateY(0);
+}
+
+/* Error state */
+.customErrorContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
-}
-
-/* Wave Animation */
-.waveContainer {
-  position: absolute;
-  bottom: -15px;
-  left: -100%;
-  width: 43.333%;
-  transition: transform 0.3s ease-out;
-  animation: slideInFromLeft 1.5s ease-out forwards;
-}
-
-.waveImage {
   width: 100%;
-  animation: waveFloat 4s ease-in-out infinite;
-  filter: drop-shadow(0 10px 15px rgba(0, 0, 255, 0.2));
 }
 
-/* Plane Animation */
-.planeContainer {
-  position: absolute;
-  left: 100px !important;
-  top: 25%;
-  transition: transform 0.2s ease-out;
-  animation: slideInPlane 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-.planeImage {
-  width: 330px;
-  animation: planeFly 6s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px rgba(20, 184, 166, 0.3));
-  transform-origin: center center;
-}
-
-/* Cloud Animation */
-.cloudContainer {
-  position: absolute;
-  right: -4rem;
-  top: 300px;
-  transition: transform 0.4s ease-out;
-  animation: slideInFromRight 1.8s ease-out forwards;
-  animation-delay: 0.5s;
-}
-
-.cloudImage {
-  width: 700px;
-  animation: cloudFloat 8s ease-in-out infinite;
-  filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.3));
-  transform-origin: center center;
-}
-
-/* Bird Animation */
-.birdContainer {
-  position: absolute;
-  right: 20px !important;
-  top: 2rem;
-  transition: transform 0.3s ease-out;
-  animation: slideInFromRight 1.2s ease-out forwards;
-  animation-delay: 1s;
-}
-
-.birdImage {
-  width: 300px;
-  animation: birdFly 4s ease-in-out infinite;
-  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
-}
-.title {
-  position: relative;
-  /* left: 50%; */
-  top: 100px;
-  font-size: 40px;
-  /* transform: translate(-50%, -50%); */
-  animation: slideInFromLeft 1.5s ease-out forwards;
-}
-.buttonContainer {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 450px;
-  height: 190px;
+.customErrorIcon {
+  width: 70px;
+  height: 70px;
+  background: rgba(231, 76, 60, 0.1);
+  color: #E74C3C;
+  font-size: 36px;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: appearAndFloat 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  margin-bottom: 20px;
+  border: 2px solid rgba(231, 76, 60, 0.5);
 }
 
-.button {
-  position: relative;
+.customErrorHeading {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #E74C3C;
+  font-family: 'Cherry Bomb One', sans-serif;
+}
+
+.customErrorDetails {
   width: 100%;
-  height: 100%;
-  padding: 0;
+  background: rgba(231, 76, 60, 0.05);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #333;
+  word-break: break-word;
+  font-family: monospace;
+  max-height: 120px;
+  overflow-y: auto;
+  border: 1px solid rgba(231, 76, 60, 0.1);
+}
+
+.customTryAgainButton {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #3498DB;
+  color: white;
   border: none;
-  background: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-  animation: pulse 2s infinite;
+  transition: all 0.2s;
+  font-family: 'Cherry Bomb One', sans-serif;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
 }
 
-.button::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  background: linear-gradient(
-    45deg,
-    #00fffc,
-    #0099ff,
-    #0040ff,
-    #2bff00,
-    #00fffc
-  );
-  border-radius: 102px;
-  filter: blur(5px);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  animation: borderGlow 3s linear infinite;
-  z-index: -1;
+.customTryAgainButton:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
 }
 
-.button:hover::before {
-  opacity: 1;
+.customTryAgainButton:active {
+  transform: translateY(0);
 }
 
-.button:hover {
-  transform: scale(1.02);
-  animation: wobble 0.5s ease-in-out;
-}
-
-.button:active {
-  transform: scale(0.98);
-}
-
-.buttonBackground {
-  position: absolute;
-  top: 0;
-  left: 0;
+.customOauthButton {
   width: 100%;
-  height: 100%;
-  pointer-events: none;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  padding: 12px;
+  background: #95a5a6;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Cherry Bomb One', sans-serif;
+  box-shadow: 0 4px 12px rgba(149, 165, 166, 0.3);
 }
 
-.buttonText {
-  position: relative;
-  z-index: 2;
-  color: #ffffff;
-  font-family: "Cherry Bomb One", serif;
-  font-size: 44px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  animation: textGlow 2s infinite;
-  -webkit-text-stroke: 0.5px black;
+.customOauthButton:hover {
+  background: #7f8c8d;
+  transform: translateY(-2px);
 }
 
-.buttonDisabled {
-  cursor: not-allowed;
-  opacity: 0.8;
-  animation: none;
+.customOauthButton:active {
+  transform: translateY(0);
 }
 
-.buttonDisabled::before {
-  display: none;
-}
-
-.buttonSpinner {
-  position: absolute;
-  right: 30%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-/* Existing animations */
-@keyframes spin {
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
   to {
-    transform: translateY(-50%) rotate(360deg);
+    opacity: 1;
   }
 }
 
-@keyframes float {
-  0%,
-  100% {
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
     transform: translateY(0);
   }
-  50% {
-    transform: translateY(-10px);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* New animations */
-@keyframes appearAndFloat {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -30%);
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -60%);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
-}
-
-/* @keyframes pulse {
-  0% {
+@keyframes pulse {
+  0%, 100% {
     transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4);
   }
   50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
-  }
-} */
-
-@keyframes borderGlow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(46, 204, 113, 0);
   }
 }
 
-@keyframes textGlow {
-  0%,
-  100% {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  50% {
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3),
-      0 0 12px rgba(0, 153, 255, 0.3);
-  }
-}
-
-@keyframes wobble {
-  0%,
-  100% {
-    transform: scale(1.02) rotate(0deg);
-  }
-  25% {
-    transform: scale(1.02) rotate(-1deg);
-  }
-  75% {
-    transform: scale(1.02) rotate(1deg);
-  }
-}
-
-/* New Keyframe Animations */
 @keyframes slideInFromLeft {
   0% {
     left: -100%;
@@ -307,27 +175,6 @@
     left: 20rem;
     opacity: 1;
     transform: rotate(0deg);
-  }
-}
-
-@keyframes popIn {
-  0% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.2);
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes ripple {
-  to {
-    transform: scale(1.5);
-    opacity: 0;
   }
 }
 
@@ -384,7 +231,7 @@
     transform: translate(0, 0) scale(1);
   }
 }
-/* 
+
 @keyframes birdFly {
   0% {
     transform: translate(0, 0) scale(1) rotate(0deg);
@@ -401,216 +248,605 @@
   100% {
     transform: translate(0, 0) scale(1) rotate(0deg);
   }
-} */
-
-@keyframes spin {
-  to {
-    transform: translateY(-50%) rotate(360deg);
-  }
 }
 
-@media (max-width: 1280px) {
-  .container {
-    /* background-size: contain; */
-  }
+/* Media Queries */
+@media (max-width: 768px) {
   .title {
-    top: 26%;
-    font-size: 35px;
+    font-size: 36px;
+    margin-top: 30px;
   }
-  .waveContainer {
-    bottom: -15px;
-    left: -100%;
-    width: 47.333%;
+  
+  .tabsWrapper {
+    width: 90%;
   }
-  .planeContainer {
-    position: absolute;
-    left: 100px !important;
-    top: 30%;
-    transition: transform 0.2s ease-out;
-    animation: slideInPlane 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  
+  .tabButton {
+    height: 50px;
   }
-  .planeImage {
-    width: 260px !important;
+  
+  .tabText {
+    font-size: 16px;
   }
-  .cloudContainer {
-    right: -4rem;
-    bottom: 10rem;
+  
+  .instructionText {
+    font-size: 18px;
   }
-
-  .cloudImage {
-    width: 600px;
+  
+  .codeBox {
+    padding: 15px;
   }
-  .buttonContainer {
-    width: 300px;
-    height: 130px !important;
-    top: 45%;
+  
+  .codeLabel {
+    font-size: 16px;
   }
-
+  
+  .codeValue {
+    font-size: 28px;
+  }
+  
+  .buttonWrapper {
+    height: 70px;
+    max-width: 300px;
+  }
+  
   .buttonText {
-    font-size: 32px;
-  }
-  .birdContainer {
-    position: absolute;
-    right: 40px !important;
-    top: 40px;
-  }
-
-  .birdImage {
-    width: 240px;
+    font-size: 18px;
   }
 }
-@media (max-width: 1030px) {
-  .container {
-    /* background-size: contain; */
-  }
-  .waveContainer {
-    bottom: -15px;
-    left: -100%;
-    width: 420px;
-  }
-  .planeContainer {
-    position: absolute;
-    /* left: 100px !important; */
-    top: 290px;
-    transition: transform 0.2s ease-out;
-    animation: slideInPlane 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-  .planeImage {
-    width: 200px !important;
-  }
-  .cloudContainer {
-    right: -5rem;
-    bottom: 5rem !important;
-  }
+
+@media (max-width: 480px) {
   .title {
     font-size: 30px;
+    margin-top: 25px;
   }
-  .cloudImage {
-    /* top: 600px !important; */
-    width: 400px !important;
+  
+  .tabsWrapper {
+    width: 95%;
   }
-  .buttonContainer {
-    width: 300px;
-    height: 130px !important;
-    top: 45%;
+  
+  .tabButton {
+    height: 45px;
   }
-
-  .buttonText {
-    font-size: 32px;
+  
+  .tabText {
+    font-size: 14px;
   }
-  .birdContainer {
-    position: absolute;
-    right: 40px !important;
-    top: 5rem;
+  
+  .instructionText {
+    font-size: 16px;
   }
-
-  .birdImage {
-    width: 200px;
+  
+  .codeBox {
+    padding: 12px;
   }
-}
-@media (max-width: 780px) {
-  .container {
-    /* background-size: contain; */
+  
+  .codeLabel {
+    font-size: 14px;
   }
-  .waveContainer {
-    bottom: -15px;
-    left: -100%;
-    width: 350px;
-  }
-  .planeContainer {
-    position: absolute;
-    left: 20px !important;
-    top: 55%;
-    transition: transform 0.2s ease-out;
-    animation: slideInPlane 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-  .planeImage {
-    width: 200px;
-  }
-  .cloudContainer {
-    right: -3rem !important;
-    bottom: 0;
-    top: 1rem;
-  }
-
-  .cloudImage {
-    width: 300px !important;
-  }
-  .buttonContainer {
-    width: 300px;
-    top: 45%;
-  }
-
-  .buttonText {
-    font-size: 32px;
-  }
-  .birdContainer {
-    position: absolute;
-    right: 0 !important;
-    left: 30px;
-    top: 5rem;
-    display: none;
-  }
-
-  .birdImage {
-    width: 200px;
-  }
-}
-
-@media (max-width: 450px) {
-  .container {
-    /* background-size: contain; */
-  }
-  .waveContainer {
-    bottom: -15px;
-    left: -100%;
-    width: 280px;
-  }
-  .planeContainer {
-    position: absolute;
-    left: 10px !important;
-    top: 64% !important;
-    /* bottom: 100px !important; */
-    transition: transform 0.2s ease-out;
-    animation: slideInPlane 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-  .planeImage {
-    width: 170px !important;
-  }
-  .cloudContainer {
-    right: -5rem;
-    bottom: 0;
-    top: 3rem;
-  }
-  .title {
-    top: 220px;
-    font-size: 26px;
-  }
-  .cloudImage {
-    width: 320px;
-  }
-  .buttonContainer {
-    width: 250px;
-    top: 50%;
-  }
-
-  .buttonText {
-    font-size: 30px;
-  }
-  .birdContainer {
-    position: absolute;
-    right: 0 !important;
-    left: 30px;
-    display: none;
-    top: 7rem !important;
-  }
-
-  .birdImage {
-    width: 200px;
-  }
-}
-@media (max-width: 380px) {
-  .title {
+  
+  .codeValue {
     font-size: 24px;
   }
+  
+  .buttonWrapper {
+    height: 60px;
+    max-width: 250px;
+  }
+  
+  .buttonText {
+    font-size: 16px;
+  }
+  
+  .customModalTitle {
+    font-size: 24px;
+  }
+  
+  .customModalText {
+    font-size: 14px;
+  }
+  
+  .customTweetBox {
+    font-size: 14px;
+    padding: 12px;
+  }
+  
+  .customAuthCode {
+    font-size: 18px;
+  }
+}/* TwitterConnect.module.css - Simplified and more visually appealing */
+
+.container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: url("/image/bg.png") no-repeat center center;
+  background-size: cover;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Background elements */
+.waveContainer {
+  position: absolute;
+  bottom: -15px;
+  left: -100%;
+  width: 43.333%;
+  transition: transform 0.3s ease-out;
+  animation: slideInFromLeft 1.5s ease-out forwards;
+}
+
+.waveImage {
+  width: 100%;
+  animation: waveFloat 4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 255, 0.2));
+}
+
+.planeContainer {
+  position: absolute;
+  left: 100px !important;
+  top: 25%;
+  transition: transform 0.2s ease-out;
+  animation: slideInPlane 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.planeImage {
+  width: 330px;
+  animation: planeFly 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(20, 184, 166, 0.3));
+  transform-origin: center center;
+}
+
+.cloudContainer {
+  position: absolute;
+  right: -4rem;
+  top: 300px;
+  transition: transform 0.4s ease-out;
+  animation: slideInFromRight 1.8s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.cloudImage {
+  width: 700px;
+  animation: cloudFloat 8s ease-in-out infinite;
+  filter: drop-shadow(0 5px 15px rgba(255, 255, 255, 0.3));
+  transform-origin: center center;
+}
+
+.birdContainer {
+  position: absolute;
+  right: 20px !important;
+  top: 2rem;
+  transition: transform 0.3s ease-out;
+  animation: slideInFromRight 1.2s ease-out forwards;
+  animation-delay: 1s;
+}
+
+.birdImage {
+  width: 300px;
+  animation: birdFly 4s ease-in-out infinite;
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+/* Title */
+.title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #333;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-family: 'Cherry Bomb One', sans-serif;
+  text-align: center;
+  animation: fadeIn 1s ease-out;
+}
+
+/* Tab Navigation */
+.tabsWrapper {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  max-width: 460px;
+  margin: 10px auto 30px;
+  gap: 10px;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 0;
+  height: 60px;
+  max-width: 220px;
+  border-radius: 999px;
+  background: white;
+  color: #555;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tabButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tabActive {
+  background: #4DA3F5;
+}
+
+.tabText {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Cherry Bomb One', sans-serif;
+  color: inherit;
+  position: relative;
+  z-index: 2;
+}
+
+.tabActive .tabText {
+  color: white;
+}
+
+/* Content Area */
+.contentArea {
+  width: 90%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.instructionText {
+  font-size: 22px;
+  line-height: 1.4;
+  text-align: center;
+  color: #333;
+  font-family: 'Cherry Bomb One', sans-serif;
+  margin-bottom: 25px;
+  max-width: 500px;
+}
+
+/* Code Box */
+.codeBox {
+  background: white;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.codeLabel {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+  font-family: 'Cherry Bomb One', sans-serif;
+}
+
+.codeValue {
+  font-size: 34px;
+  font-weight: 800;
+  color: #4DA3F5;
+  margin: 0;
+  letter-spacing: 1px;
+  font-family: 'Cherry Bomb One', sans-serif;
+}
+
+/* Button */
+.buttonWrapper {
+  width: 100%;
+  max-width: 350px;
+  height: 80px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.actionButton {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.actionButton:hover {
+  transform: translateY(-3px);
+}
+
+.actionButton:active {
+  transform: translateY(-1px);
+}
+
+.buttonText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'Cherry Bomb One', sans-serif;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 2;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.buttonSpinner {
+  position: absolute;
+  right: 20%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 2;
+}
+
+/* Modal overlay and wrapper */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.customModalWrapper {
+  position: relative;
+  width: 90%;
+  max-width: 450px;
+  background: #FFF9E8;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 0 2px #F2AD41;
+  overflow: hidden;
+  animation: slideUp 0.4s ease-out;
+  padding-bottom: 20px;
+}
+
+/* GM bubble and close button */
+.gmBubble {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #F2D285;
+  color: #634B00;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  font-family: 'Cherry Bomb One', sans-serif;
+  z-index: 10;
+}
+
+.customCloseButton {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #F2AD41;
+  color: white;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 10;
+  transition: all 0.2s ease;
+  font-family: 'Cherry Bomb One', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.customCloseButton:hover {
+  background: #E79B22;
+  transform: translateY(-2px);
+}
+
+.customCloseButton:active {
+  transform: translateY(0);
+}
+
+/* Modal content */
+.customModalContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  padding-top: 50px;
+}
+
+.customModalTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+  font-family: 'Cherry Bomb One', sans-serif;
+  width: 100%;
+}
+
+.customModalText {
+  font-size: 16px;
+  text-align: center;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  max-width: 400px;
+  font-family: 'Cherry Bomb One', sans-serif;
+}
+
+/* Tweet box */
+.customTweetBox {
+  width: 100%;
+  background: #E8F4FF;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  font-family: 'Cherry Bomb One', sans-serif;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 100, 0.05);
+}
+
+.customAuthCode {
+  display: block;
+  font-size: 20px;
+  margin-top: 8px;
+  font-weight: bold;
+  color: #000;
+  letter-spacing: 1px;
+}
+
+/* Action buttons */
+.customPostButton {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #1DA1F2;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Cherry Bomb One', sans-serif;
+  box-shadow: 0 4px 12px rgba(29, 161, 242, 0.3);
+}
+
+.customPostButton:hover {
+  background: #0d8ecf;
+  transform: translateY(-2px);
+}
+
+.customPostButton:active {
+  transform: translateY(0);
+}
+
+.customVerifyButton {
+  width: 100%;
+  padding: 12px;
+  background: #F2AD41;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Cherry Bomb One', sans-serif;
+  box-shadow: 0 4px 12px rgba(242, 173, 65, 0.3);
+}
+
+.customVerifyButton:hover {
+  background: #e29520;
+  transform: translateY(-2px);
+}
+
+.customVerifyButton:active {
+  transform: translateY(0);
+}
+
+/* Loading state */
+.customLoadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.customSpinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(242, 173, 65, 0.2);
+  border-top-color: #F2AD41;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.customLoadingText {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: center;
+  font-family: 'Cherry Bomb One', sans-serif;
+}
+
+.customLoadingSubtext {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  font-family: 'Cherry Bomb One', sans-serif;
+}
+
+/* Success state */
+.customSuccessContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.customSuccessIcon {
+  width: 70px;
+  height: 70px;
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ECC71;
+  font-size: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 2px solid rgba(46, 204, 113, 0.5);
+  animation: pulse 2s infinite;
+}
+
+.customSuccessText {
+  font-size: 18px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  font-family: 'Cherry Bomb One', sans-serif;
+}
+
+.customContinueButton {
+  width: 100%;
+  padding: 12px;
+  background: #2ECC71;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Cherry Bomb One', sans-serif;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
 }

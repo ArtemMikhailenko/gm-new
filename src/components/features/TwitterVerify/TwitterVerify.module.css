@@ -1,0 +1,714 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: url("/image/bg.png") no-repeat center center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+  }
+  
+  .waveContainer,
+  .planeContainer,
+  .cloudContainer,
+  .birdContainer {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 0.1s ease-out;
+  }
+  
+  .waveContainer {
+    top: 30%;
+    left: 0;
+  }
+  
+  .planeContainer {
+    top: 15%;
+    right: 10%;
+  }
+  
+  .cloudContainer {
+    bottom: 10%;
+    left: 5%;
+  }
+  
+  .birdContainer {
+    top: 25%;
+    right: 15%;
+  }
+  
+  .waveImage {
+    width: 400px;
+    height: auto;
+  }
+  
+  .planeImage {
+    width: 120px;
+    height: auto;
+  }
+  
+  .cloudImage {
+    width: 250px;
+    height: auto;
+  }
+  
+  .birdImage {
+    width: 180px;
+    height: auto;
+  }
+  
+  .title {
+    font-family: "Cherry Bomb One", serif;
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    position: relative;
+  }
+  
+  .tabsContainer {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .tabButton {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: "Cherry Bomb One", serif;
+    font-size: 16px;
+    color: #666;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tabButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .activeTab {
+    background: linear-gradient(145deg, #1da1f2, #0c85d0);
+    color: white;
+    border-color: #1da1f2;
+    box-shadow: 0 4px 10px rgba(29, 161, 242, 0.3);
+  }
+  
+  .verificationContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 500px;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .verificationInfo {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    line-height: 1.5;
+  }
+  
+  .codeBox {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 15px 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .codeLabel {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .codeValue {
+    font-family: 'Cherry Bomb One', serif;
+    font-size: 24px;
+    color: #1da1f2;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  
+  .buttonContainer {
+    position: relative;
+    width: 340px;
+    height: 125px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    z-index: 2;
+  }
+  
+  .button {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .button:hover {
+    transform: scale(1.02);
+  }
+  
+  .button:active {
+    transform: scale(0.98);
+  }
+  
+  .buttonDisabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  .buttonText {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+    font-family: "Cherry Bomb One", serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    -webkit-text-stroke: 0.5px black;
+  }
+  
+  .buttonSpinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: spin 1s linear infinite;
+  }
+  
+  .errorMessage {
+    color: #e53935;
+    background-color: rgba(255, 235, 238, 0.9);
+    border: 1px solid #ffcdd2;
+    padding: 12px 16px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 100%;
+    margin-top: 15px;
+  }
+  
+  /* Modal Styles */
+  .modalContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .modalTitle {
+    font-family: "Cherry Bomb One", serif;
+    font-size: 24px;
+    margin: 0;
+    color: #333;
+  }
+  
+  .modalText {
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  .tweetPreview {
+    background-color: rgba(29, 161, 242, 0.1);
+    border: 1px solid rgba(29, 161, 242, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    width: 100%;
+  }
+  
+  .tweetPreview p {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  .modalActions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .modalButton {
+    font-family: "Cherry Bomb One", serif;
+    background: linear-gradient(145deg, #ffbb00, #ff8c00);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(255, 187, 0, 0.25);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modalButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 187, 0, 0.3);
+  }
+  
+  .modalButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(255, 187, 0, 0.2);
+  }
+  
+  .tweetButton {
+    background: linear-gradient(145deg, #1da1f2, #0c85d0);
+    box-shadow: 0 4px 8px rgba(29, 161, 242, 0.25);
+  }
+  
+  .tweetButton:hover {
+    box-shadow: 0 6px 12px rgba(29, 161, 242, 0.3);
+  }
+  
+  .alternateButton {
+    background: linear-gradient(145deg, #757575, #616161);
+    box-shadow: 0 4px 8px rgba(117, 117, 117, 0.25);
+  }
+  
+  .alternateButton:hover {
+    box-shadow: 0 6px 12px rgba(117, 117, 117, 0.3);
+  }
+  
+  /* Loading States */
+  .loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #1da1f2;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+  }
+  
+  .loadingText {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .loadingSubtext {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* Success and Error States */
+  .successContainer, .errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .successIcon {
+    width: 60px;
+    height: 60px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .errorIcon {
+    width: 60px;
+    height: 60px;
+    background-color: #f44336;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .successText, .errorText {
+    font-size: 18px;
+    text-align: center;
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  .successText {
+    color: #2e7d32;
+  }
+  
+  .errorText {
+    color: #c62828;
+  }
+  /* Дополнительные стили для TwitterVerify.module.css */
+
+/* Подсказки */
+.tooltip {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 200px;
+  z-index: 10;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.tooltipArrow {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(0, 0, 0, 0.8);
+}
+
+/* Шаги верификации */
+.stepGuide {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: #1da1f2;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(29, 161, 242, 0.3);
+}
+
+.methodGuide {
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px 15px;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Кнопка копирования */
+.codeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.copyButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #1da1f2;
+  transition: all 0.2s ease;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.copyButton:hover {
+  background: rgba(29, 161, 242, 0.1);
+  transform: scale(1.1);
+}
+
+.copyNotification {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  animation: fadeInOut 2s forwards;
+}
+
+/* OAuth info */
+.oauthContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 500px;
+  z-index: 2;
+  position: relative;
+}
+
+.oauthInfo {
+  display: flex;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 15px 20px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.infoIcon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+/* Стили для предпросмотра твита */
+.tweetPreviewHeader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #1da1f2;
+}
+
+.tweetIcon {
+  font-size: 18px;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(5px); }
+  20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-5px); }
+}
+
+/* Стили для лоадера верификации */
+.loadingAnimation {
+  width: 100%;
+  height: 40px;
+  background: rgba(29, 161, 242, 0.1);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.scanLine {
+  position: absolute;
+  top: 0;
+  left: -100px;
+  width: 100px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(29, 161, 242, 0.5),
+    transparent
+  );
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  0% { left: -100px; }
+  100% { left: 100%; }
+}
+
+/* Анимация конфетти для успешной верификации */
+.confetti {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 100%;
+  pointer-events: none;
+}
+
+.confetti::before,
+.confetti::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #1da1f2;
+  opacity: 0.7;
+  border-radius: 2px;
+  animation: confettiFall 3s ease-in-out infinite;
+}
+
+.confetti::before {
+  left: 30%;
+  animation-delay: 0.2s;
+  background: #4caf50;
+}
+
+.confetti::after {
+  left: 70%;
+  animation-delay: 0.5s;
+  background: #ff9800;
+}
+
+@keyframes confettiFall {
+  0% { 
+    transform: translateY(-20px) rotate(0deg); 
+    opacity: 1;
+  }
+  100% { 
+    transform: translateY(350px) rotate(360deg); 
+    opacity: 0;
+  }
+}
+
+/* Иконки для кнопок */
+.buttonIcon {
+  margin-right: 8px;
+}
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 30px;
+    }
+    
+    .tabButton {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+    
+    .buttonContainer {
+      width: 300px;
+      height: 110px;
+    }
+    
+    .buttonText {
+      font-size: 22px;
+    }
+    
+    .waveImage {
+      width: 300px;
+    }
+    
+    .planeImage {
+      width: 100px;
+    }
+    
+    .cloudImage {
+      width: 200px;
+    }
+    
+    .birdImage {
+      width: 150px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .title {
+      font-size: 24px;
+    }
+    
+    .tabButton {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+    
+    .buttonContainer {
+      width: 260px;
+      height: 100px;
+    }
+    
+    .buttonText {
+      font-size: 18px;
+    }
+    
+    .codeValue {
+      font-size: 20px;
+    }
+    
+    .waveImage {
+      width: 200px;
+    }
+    
+    .planeImage {
+      width: 80px;
+    }
+    
+    .cloudImage {
+      width: 150px;
+    }
+    
+    .birdImage {
+      width: 120px;
+    }
+    
+    .modalTitle {
+      font-size: 20px;
+    }
+  }

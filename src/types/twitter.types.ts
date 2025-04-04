@@ -10,3 +10,15 @@ export interface TwitterVerificationProps {
   onSuccess: () => void;
   onError: (error: string) => void;
 }
+
+export interface TwitterConnectProps {
+  onConnectClick: () => Promise<void>;
+  isConnecting: boolean;
+}
+
+export interface TwitterVerifyProps {
+  onConnectClick: () => Promise<void>;
+  isConnecting: boolean;
+  walletAddress: string;
+  onVerificationSuccess: () => void;
+}

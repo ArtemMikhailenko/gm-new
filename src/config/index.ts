@@ -9,6 +9,7 @@ export const CONTRACT_ABI = [
   "function symbol() view returns (string)",
   "function name() view returns (string)",
   "function requestTwitterVerification(string accessCodeEncrypted, string userID)",
+  "function requestTwitterVerificationByTweet(string authCode)",
   "event Transfer(address indexed from, address indexed to, uint256 value)",
   "event TwitterVerificationResult(string userID, address wallet, bool isSuccess, string errorMsg)",
 ] as const;
@@ -47,9 +48,9 @@ export const CURRENT_CHAIN =
 // For compatibility with existing code
 export const CHAINS = [
   {
-    id: CURRENT_CHAIN.id,
-    token: CURRENT_CHAIN.token,
-    label: CURRENT_CHAIN.label,
-    rpcUrl: CURRENT_CHAIN.rpcUrl,
+    id: CURRENT_CHAIN?.id,
+    token: CURRENT_CHAIN?.token,
+    label: CURRENT_CHAIN?.label,
+    rpcUrl: CURRENT_CHAIN?.rpcUrl,
   },
 ];
