@@ -1,17 +1,10 @@
-// TwitterConnect.tsx with copy button added
-"use client";
-
+// TwitterConnect.tsx
 import React, { useEffect, useState } from "react";
 import type { TwitterConnectProps } from "@/src/types";
 import styles from "./TwitterConnect.module.css";
-import cloude from "@/public/image/xcloude.webp";
-import plane from "@/public/image/planepng.webp";
-import whcloude from "@/public/image/whcloude.webp";
-import bird from "@/public/image/birds.png";
 import ButtonBackground from "../../ui/buttons/BlueButton";
-import Modal from "../../modals/Modal";
 import { ethers } from "ethers";
-import { CONTRACT_ADDRESS, CONTRACT_ABI } from "@/src/config";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "@/src/config";
 
 // Tweet templates array
 const TWEET_TEMPLATES = [
@@ -120,6 +113,20 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 
+      // Try to estimate gas first to catch errors early
+      try {
+        await contract.requestTwitterVerificationByTweet.estimateGas(authCode);
+      } catch (estimateError: any) {
+        console.error("Gas estimation failed:", estimateError);
+        
+        // Handle specific error related to tweet verification
+        if (estimateError.code === 'CALL_EXCEPTION') {
+          throw new Error("Smart contract rejected the verification. Please make sure you've posted the tweet with your verification code.");
+        }
+        
+        throw estimateError;
+      }
+
       // Request verification
       const tx = await contract.requestTwitterVerificationByTweet(authCode);
       console.log("Transaction hash:", tx.hash);
@@ -162,8 +169,50 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
       let formattedError = error.message || "An error occurred during verification";
       let errorDetails = "";
       
+      // Handle Ethereum JSON-RPC errors including "could not coalesce error"
+      if (formattedError.includes("could not coalesce error") || formattedError.includes("Unexpected error")) {
+        // Extract and display relevant transaction details from error payload
+        try {
+          // Check for error object that contains payload
+          const payloadMatch = formattedError.match(/payload=(\{.*\})/);
+          
+          if (payloadMatch && payloadMatch[1]) {
+            let payloadData;
+            
+            try {
+              // Try to parse the payload portion
+              const cleanedPayload = payloadMatch[1].replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2":');
+              payloadData = JSON.parse(cleanedPayload);
+            } catch (parseError) {
+              // If direct parsing fails, try to extract just the method and params parts
+              const methodMatch = formattedError.match(/"method":\s*"([^"]+)"/);
+              const method = methodMatch ? methodMatch[1] : "unknown";
+              
+              formattedError = "Transaction Error";
+              errorDetails = `Error with ${method} request. Please try again or use OAuth verification instead.`;
+            }
+            
+            if (payloadData) {
+              if (payloadData.method === "eth_sendTransaction") {
+                formattedError = "Transaction Error";
+                errorDetails = "Failed to send transaction to the network. This may be due to network congestion or wallet issues.";
+              } else if (payloadData.method === "eth_estimateGas") {
+                formattedError = "Verification Error";
+                errorDetails = "Your tweet may not be visible or properly formatted. Make sure you've posted a tweet with the exact verification code.";
+              }
+            }
+          } else {
+            formattedError = "Ethereum Error";
+            errorDetails = "There was an issue with the transaction. Please try again or try a different verification method.";
+          }
+        } catch (e) {
+          // If extraction fails, provide a generic message
+          formattedError = "Unexpected Error";
+          errorDetails = "There was an issue processing your transaction. Consider using OAuth verification instead.";
+        }
+      } 
       // Parse and format JSON errors
-      if (formattedError.includes('{"error"')) {
+      else if (formattedError.includes('{"error"')) {
         try {
           const errorStart = formattedError.indexOf('{"error"');
           const errorJSON = formattedError.substring(errorStart);
@@ -185,6 +234,12 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
       } else if (formattedError.includes("insufficient funds")) {
         formattedError = "Insufficient funds";
         errorDetails = "Your wallet doesn't have enough funds to complete this transaction.";
+      } else if (formattedError.includes("CALL_EXCEPTION")) {
+        formattedError = "Tweet verification failed";
+        errorDetails = "The contract couldn't verify your tweet. Make sure you've posted the exact verification code.";
+      } else if (formattedError.includes("UNKNOWN_ERROR") || formattedError.includes("code=-32603")) {
+        formattedError = "Wallet communication error";
+        errorDetails = "There was an issue communicating with your wallet. Try refreshing the page or using OAuth verification instead.";
       }
       
       setErrorMessage(formattedError);
@@ -217,7 +272,7 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
           transform: `translate(${mousePosition.x * 0.2}px, ${mousePosition.y * 0.2}px)`,
         }}
       >
-        <img src={cloude.src} alt="" className={styles.waveImage} />
+        <img src="/image/xcloude.webp" alt="" className={styles.waveImage} />
       </div>
       <div
         className={styles.planeContainer}
@@ -225,7 +280,7 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
           transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
         }}
       >
-        <img src={plane.src} alt="" className={styles.planeImage} />
+        <img src="/image/planepng.webp" alt="" className={styles.planeImage} />
       </div>
       <div
         className={styles.cloudContainer}
@@ -233,7 +288,7 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
           transform: `translate(${mousePosition.x * -0.3}px, ${mousePosition.y * -0.3}px)`,
         }}
       >
-        <img src={whcloude.src} alt="" className={styles.cloudImage} />
+        <img src="/image/whcloude.webp" alt="" className={styles.cloudImage} />
       </div>
       <div
         className={styles.birdContainer}
@@ -241,7 +296,7 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
           transform: `translate(${mousePosition.x * -0.5}px, ${mousePosition.y * -0.5}px)`,
         }}
       >
-        <img src={bird.src} alt="" className={styles.birdImage} />
+        <img src="/image/birds.png" alt="" className={styles.birdImage} />
       </div>
       
       {/* Title */}
@@ -283,7 +338,10 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
                   {copied ? (
                     <span className={styles.copiedIcon}>✓</span>
                   ) : (
-                    <span className={styles.copyIcon}>📋</span>
+                    <svg className={styles.copyIcon} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
                   )}
                 </button>
               </div>
@@ -355,7 +413,12 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
                       onClick={copyToClipboard}
                       title="Copy to clipboard"
                     >
-                      {copied ? "✓" : "📋"}
+                      {copied ? "✓" : (
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                      )}
                     </button>
                   </div>
                 </div>
