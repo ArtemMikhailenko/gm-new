@@ -461,7 +461,7 @@
   }
   
   .codeValue {
-    font-size: 20px !important;
+    font-size: 22px !important;
   }
   
   .buttonWrapper {
@@ -505,7 +505,7 @@
   }
   
   .codeValue {
-    font-size: 18px !important;
+    font-size: 24px;
   }
   
   .buttonWrapper {
@@ -606,7 +606,6 @@
   margin-bottom: 20px;
   font-family: 'Cherry Bomb One', sans-serif;
   text-align: center;
-  z-index: 10;
   animation: fadeIn 1s ease-out;
 }
 
@@ -772,7 +771,7 @@
 /* Button */
 .buttonWrapper {
   width: 100%;
-  max-width: 450px;
+  max-width: 350px;
   height: 100px;
   margin: 0 auto;
   position: relative;
@@ -940,6 +939,58 @@
   font-family: 'Cherry Bomb One', sans-serif;
   box-shadow: inset 0 2px 5px rgba(0, 0, 100, 0.05);
 }
+
+.tweetBoxHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.tweetBoxLabel {
+  font-weight: bold;
+  color: #1DA1F2;
+}
+
+.refreshTweetButton {
+  background: #1DA1F2;
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(29, 161, 242, 0.3);
+}
+
+.refreshTweetButton:hover {
+  transform: rotate(180deg);
+  background: #0b8ad9;
+  box-shadow: 0 2px 12px rgba(29, 161, 242, 0.5);
+}
+
+.refreshTweetButton:active {
+  transform: scale(0.9) rotate(180deg);
+}
+
+.tweetPreview {
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  color: #333;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease-out;
+}
 @media (max-width: 1280px) {
   .container {
     /* background-size: contain; */
@@ -1027,7 +1078,7 @@
   }
 
   .buttonText {
-    font-size: 32px;
+    font-size: 20px !important;
   }
   .birdContainer {
     position: absolute;
@@ -1040,8 +1091,8 @@
   }
 }
 @media (max-width: 780px) {
-  .container {
-    /* background-size: contain; */
+  .buttonWrapper{
+    height: 90 !important;
   }
   .waveContainer {
     bottom: -15px;
@@ -1058,17 +1109,12 @@
   .planeImage {
     width: 200px;
   }
-  .buttonWrapper{
-    height: 80px;
-  }
   .cloudContainer {
-    right: -3rem !important;
-    bottom: 0;
-    top: 1rem;
+   display: none;
   }
 
   .cloudImage {
-    display: none;
+    width: 300px !important;
   }
   .buttonContainer {
     width: 300px;
@@ -1129,7 +1175,7 @@
   }
 
   .buttonText {
-    font-size: 18px;
+    font-size: 30px;
   }
   .birdContainer {
     position: absolute;

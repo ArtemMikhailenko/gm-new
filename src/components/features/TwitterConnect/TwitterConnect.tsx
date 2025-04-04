@@ -71,6 +71,11 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
     setAuthCode(code);
 
     // Select random tweet template and insert auth code
+    generateRandomTweet(code);
+  };
+
+  // Function to generate random tweet
+  const generateRandomTweet = (code: string) => {
     const randomTemplate = TWEET_TEMPLATES[Math.floor(Math.random() * TWEET_TEMPLATES.length)];
     setTweetText(randomTemplate.replace("{authCode}", code));
   };
@@ -404,8 +409,21 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
                 </p>
                 
                 <div className={styles.customTweetBox}>
-                  Spreading GM vibes with GMCoin! Verification code: 
-                  <br />
+                  <div className={styles.tweetBoxHeader}>
+                    <span className={styles.tweetBoxLabel}>Your tweet message:</span>
+                    <button 
+                      className={styles.refreshTweetButton} 
+                      onClick={() => generateRandomTweet(authCode)}
+                      title="Change tweet message"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M23 4v6h-6"></path>
+                        <path d="M1 20v-6h6"></path>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  <p className={styles.tweetPreview}>{tweetText}</p>
                   <div className={styles.modalCodeWrapper}>
                     <strong className={styles.customAuthCode}>{authCode}</strong>
                     <button 
