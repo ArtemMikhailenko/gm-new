@@ -1,4 +1,4 @@
-// TwitterConnect.tsx - Simplified and more visually appealing
+// TwitterConnect.tsx with copy button added
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -34,6 +34,7 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
   const [verificationStatus, setVerificationStatus] = useState<"idle" | "pending" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [errorDetails, setErrorDetails] = useState("");
+  const [copied, setCopied] = useState(false);
 
   // Parallax effect
   useEffect(() => {
@@ -55,6 +56,16 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
     }
   }, []);
 
+  // Reset copy state after 2 seconds
+  useEffect(() => {
+    if (copied) {
+      const timer = setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [copied]);
+
   const generateAuthCode = (walletAddress: string) => {
     // Get first 5 chars from wallet address (without "0x")
     const walletFirst5 = walletAddress.slice(2, 7).toUpperCase();
@@ -69,6 +80,15 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
     // Select random tweet template and insert auth code
     const randomTemplate = TWEET_TEMPLATES[Math.floor(Math.random() * TWEET_TEMPLATES.length)];
     setTweetText(randomTemplate.replace("{authCode}", code));
+  };
+
+  // Copy verification code to clipboard
+  const copyToClipboard = () => {
+    if (authCode) {
+      navigator.clipboard.writeText(authCode).then(() => {
+        setCopied(true);
+      });
+    }
   };
 
   // Open X/Twitter intent window
@@ -253,7 +273,20 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
             
             <div className={styles.codeBox}>
               <p className={styles.codeLabel}>Your verification code:</p>
-              <p className={styles.codeValue}>{authCode}</p>
+              <div className={styles.codeRow}>
+                <p className={styles.codeValue}>{authCode}</p>
+                <button 
+                  className={styles.copyButton} 
+                  onClick={copyToClipboard}
+                  title="Copy to clipboard"
+                >
+                  {copied ? (
+                    <span className={styles.copiedIcon}>✓</span>
+                  ) : (
+                    <span className={styles.copyIcon}>📋</span>
+                  )}
+                </button>
+              </div>
             </div>
             
             <div className={styles.buttonWrapper}>
@@ -272,7 +305,7 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
         {verificationMethod === "oauth" && (
           <>
             <p className={styles.instructionText}>
-            Give permission to your account through standart OAuth2 protocol. Just few clicks, and you don't need to write any tweet.
+            Give permission to your account through standard OAuth2 protocol. Just few clicks, and you don't need to write any tweet.
             </p>
             
             <div className={styles.buttonWrapper}>
@@ -315,7 +348,16 @@ const TwitterConnect: React.FC<TwitterConnectProps> = ({
                 <div className={styles.customTweetBox}>
                   Spreading GM vibes with GMCoin! Verification code: 
                   <br />
-                  <strong className={styles.customAuthCode}>{authCode}</strong>
+                  <div className={styles.modalCodeWrapper}>
+                    <strong className={styles.customAuthCode}>{authCode}</strong>
+                    <button 
+                      className={styles.modalCopyButton} 
+                      onClick={copyToClipboard}
+                      title="Copy to clipboard"
+                    >
+                      {copied ? "✓" : "📋"}
+                    </button>
+                  </div>
                 </div>
                 
                 <button 
