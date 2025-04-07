@@ -95,3 +95,4 @@ declare module '@web3-onboard/core' {
     }
     export const AmbireWalletModule: (options: AmbireOptions) => any;
   }
+  

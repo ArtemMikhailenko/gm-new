@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { init, useSetChain, useWallets } from "@web3-onboard/react";
+import torusModule from "@web3-onboard/torus";
+import Onboard from '@web3-onboard/core'
 
 import injectedModule from "@web3-onboard/injected-wallets";
 import metamaskSDK from "@web3-onboard/metamask";
@@ -26,6 +28,7 @@ export const useWeb3 = () => {
     null
   );
   const [connectedChain, setConnectedChain] = useState<Chain | null>(null);
+  const torus = torusModule();
 
   useEffect(() => {
     if (!web3Onboard) return;
@@ -85,12 +88,13 @@ export const useWeb3 = () => {
     const phantom = phantomModule();
     const injected = injectedModule();
 
-    const onboard = init({
+    const onboard = Onboard({
       // Add coinbaseWallet to the wallets array
       wallets: [
         injected,
         metamaskSDKWallet,
         phantom,
+        torus,
         walletConnect,
         coinbaseWallet,
         // ambireWallet,
